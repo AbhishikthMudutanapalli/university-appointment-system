@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="page-wrapper">
+  <div class="card card-wide">
+    <div class="card-header">
+      <h2>Appointments</h2>
+      <a class="btn-primary-link" href="{{ url_for('new_appointment') }}">
+        + New Appointment
+      </a>
+    </div>
+
+    {% if appointments %}
+      <table class="appointments-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Student</th>
+            <th>Faculty</th>
+            <th>Status</th>
+            <th>Purpose</th>
+            <th class="col-actions">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for a in appointments %}
+          <tr>
+            <td>{{ a.appointment_id }}</td>
+            <td>{{ a.appointment_date }}</td>
+            <td>{{ a.start_time }} – {{ a.end_time }}</td>
+            <td>{{ a.student.name }}</td>
+            <td>{{ a.faculty.name }}</td>
+            <td class="status {{ a.status|lower }}">
+              {{ a.status }}
+            </td>
+            <td>{{ a.purpose }}</td>
+            <td class="col-actions">
+              <a
+                class="link-danger"
+                href="{{ url_for('cancel_appointment', appointment_id=a.appointment_id) }}"
+              >
+                Cancel
+              </a>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <p class="empty-text">No appointments yet.</p>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="page-wrapper">
+    <div class="card card-wide">
+        <h2 style="text-align:center; margin-bottom:25px;">Dashboard</h2>
+
+        <div class="stats-grid">
+            <div class="stat-box">
+                <h3>Total Appointments</h3>
+                <p>{{ total_appointments }}</p>
+            </div>
+
+            <div class="stat-box">
+                <h3>My Appointments</h3>
+                <p>{{ my_appointments }}</p>
+            </div>
+
+            {% if user.role == 'admin' %}
+            <div class="stat-box">
+                <h3>Departments with Appointments</h3>
+                <p>{{ chart_labels|length }}</p>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>
+        {% block title %}University Appointment Management System{% endblock %}
+    </title>
+
+    <!-- Main stylesheet -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <!-- Page-specific background using Flask url_for -->
+    <style>
+        body {
+            background:
+                linear-gradient(rgba(0,0,0,0.40), rgba(0,0,0,0.40)),
+                url("{{ url_for('static', filename='img/wsu.jpg') }}")
+                no-repeat center center fixed;
+            background-size: cover;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Top navigation bar -->
+    <header>
+        <h1>University Appointment Management System</h1>
+        <nav>
+            {% if session.get('user_id') %}
+                <a href="{{ url_for('dashboard') }}">Dashboard</a>
+                <a href="{{ url_for('appointments') }}">Appointments</a>
+
+                {% if user and user.role == 'faculty' %}
+                    <a href="{{ url_for('availability') }}">My Availability</a>
+                {% endif %}
+
+                {% if user and user.role == 'admin' %}
+                    <a href="{{ url_for('departments') }}">Departments</a>
+                {% endif %}
+
+                <a href="{{ url_for('logout') }}">Logout</a>
+            {% else %}
+                <a href="{{ url_for('login') }}">Login</a>
+                <a href="{{ url_for('register') }}">Register</a>
+            {% endif %}
+        </nav>
+    </header>
+
+    <!-- Flash messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+      <div class="flash-container">
+        {% for category, message in messages %}
+          <div class="flash flash-{{ category }}">
+              {{ message }}
+          </div>
+        {% endfor %}
+      </div>
+      {% endif %}
+    {% endwith %}
+
+    <!-- Main page content (each child template fills this) -->
+    {% block content %}{% endblock %}
+
+</body>
+</html>

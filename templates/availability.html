@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="page-wrapper">
+  <div class="card card-wide">
+    <div class="card-header">
+      <h2>My Availability</h2>
+    </div>
+
+    <!-- Add new slot form -->
+    <form method="post" style="margin-bottom: 16px;">
+      <div style="display: grid; grid-template-columns: 1.5fr 1fr 1fr auto; gap: 10px; align-items: end;">
+        <div>
+          <label for="day_of_week">Day of week</label>
+          <select id="day_of_week" name="day_of_week" required>
+            <option value="Mon">Monday</option>
+            <option value="Tue">Tuesday</option>
+            <option value="Wed">Wednesday</option>
+            <option value="Thu">Thursday</option>
+            <option value="Fri">Friday</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="start_time">Start time</label>
+          <input id="start_time" type="time" name="start_time" required>
+        </div>
+
+        <div>
+          <label for="end_time">End time</label>
+          <input id="end_time" type="time" name="end_time" required>
+        </div>
+
+        <div>
+          <button type="submit">Add Slot</button>
+        </div>
+      </div>
+    </form>
+
+    {% if slots %}
+      <table class="appointments-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Day</th>
+            <th>Time</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for s in slots %}
+          <tr>
+            <td>{{ s.availability_id }}</td>
+            <td>{{ s.day_of_week }}</td>
+            <td>{{ s.start_time }} – {{ s.end_time }}</td>
+            <td class="status {{ 'scheduled' if s.is_available else 'cancelled' }}">
+              {{ 'Available' if s.is_available else 'Not available' }}
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <p class="empty-text">No availability slots yet. Use the form above to add some.</p>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

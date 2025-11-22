@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="page-wrapper">
+    <div class="card">
+        <h2>New Appointment</h2>
+
+        <form method="post">
+
+            <label>Faculty</label>
+            <select name="faculty_id" required>
+                <option value="">Select Faculty</option>
+                {% for f in faculty_members %}
+                <option value="{{ f.user_id }}">{{ f.name }}</option>
+                {% endfor %}
+            </select>
+
+            <label>Date</label>
+            <input type="date" name="appointment_date" required>
+
+            <label>Start Time</label>
+            <input type="time" name="start_time" required>
+
+            <label>End Time</label>
+            <input type="time" name="end_time" required>
+
+            <label>Purpose</label>
+            <textarea name="purpose" rows="3" placeholder="Meeting purpose..." required></textarea>
+
+            <button type="submit">Create Appointment</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

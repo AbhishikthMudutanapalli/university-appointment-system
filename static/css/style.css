@@ -1,0 +1,292 @@
+/* ==========================
+   GLOBAL RESET / LAYOUT
+   ========================== */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    color: #222;
+}
+
+/* Background image + dark overlay */
+body {
+    background:
+        linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
+        url("../img/wsu.jpg") no-repeat center center fixed;
+    background-size: cover;
+}
+
+/* Allows pages to center content, except the header */
+.page-wrapper {
+    min-height: calc(100vh - 100px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+}
+
+/* ==========================
+   HEADER + NAVIGATION
+   ========================== */
+
+header {
+    width: 100%;
+    background: rgba(0,0,0,0.75);
+    color: white;
+    padding: 15px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 1.3rem;
+}
+
+nav a {
+    color: #f0f0f0;
+    text-decoration: none;
+    margin-left: 18px;
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+nav a:hover {
+    text-decoration: underline;
+    color: #ffd966;
+}
+
+/* Flash messages */
+.flash-container {
+    width: 100%;
+    margin: 15px auto 0;
+    max-width: 700px;
+    padding: 0 20px;
+}
+
+.flash {
+    padding: 12px 16px;
+    border-radius: 6px;
+    margin-bottom: 10px;
+    font-size: 0.95rem;
+}
+
+.flash-success { background: #d4edda; color: #155724; }
+.flash-danger { background: #f8d7da; color: #721c24; }
+.flash-warning { background: #fff3cd; color: #856404; }
+.flash-info { background: #d1ecf1; color: #0c5460; }
+
+/* ==========================
+   CARD COMPONENT
+   ========================== */
+
+.card {
+    background: rgba(255,255,255,0.94);
+    border-radius: 16px;
+    padding: 25px 30px;
+    box-shadow: 0 18px 45px rgba(0,0,0,0.35);
+    max-width: 420px;
+    width: 100%;
+}
+
+/* Wider card for Appointment pages */
+.card-wide {
+    max-width: 1000px;
+}
+
+/* Header inside cards */
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 18px;
+}
+
+.card-header h2 {
+    margin: 0;
+    font-size: 1.4rem;
+}
+
+/* ==========================
+   BUTTONS
+   ========================== */
+
+button,
+.btn-primary-link {
+    border: none;
+    cursor: pointer;
+    font: inherit;
+    border-radius: 999px;
+    padding: 9px 18px;
+    background-color: #00b894;
+    color: white;
+    font-weight: 600;
+    text-decoration: none;
+    transition: 0.15s ease-in-out;
+}
+
+button:hover,
+.btn-primary-link:hover {
+    background-color: #009f7e;
+    transform: translateY(-1px);
+}
+
+/* Links */
+a {
+    color: #2d6cdf;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.link-danger {
+    color: #e74c3c;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.link-danger:hover {
+    text-decoration: underline;
+}
+
+/* ==========================
+   FORMS (login/register/etc.)
+   ========================== */
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-top: 6px;
+}
+
+input, select, textarea {
+    padding: 9px 10px;
+    border-radius: 8px;
+    border: 1px solid #d0d0d0;
+    background: #fafafa;
+    font: inherit;
+}
+
+input:focus, select:focus, textarea:focus {
+    border-color: #00b894;
+    background: white;
+    box-shadow: 0 0 0 2px rgba(0,184,148,0.15);
+}
+
+.card h2 {
+    text-align: center;
+    margin-top: 0;
+}
+
+/* ==========================
+   APPOINTMENTS TABLE
+   ========================== */
+
+.appointments-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: rgba(255,255,255,0.97);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: 10px;
+}
+
+.appointments-table th,
+.appointments-table td {
+    padding: 10px 14px;
+    border-bottom: 1px solid #e0e0e0;
+    text-align: left;
+    font-size: 0.95rem;
+}
+
+.appointments-table th {
+    background: #f3f3f3;
+    font-weight: 600;
+}
+
+.appointments-table tr:last-child td {
+    border-bottom: none;
+}
+
+.col-actions {
+    text-align: center;
+}
+
+/* Status styling */
+.status {
+    font-weight: 600;
+}
+
+.status.scheduled { color: #27ae60; }
+.status.cancelled { color: #e74c3c; }
+.status.completed { color: #2980b9; }
+
+/* Empty table text */
+.empty-text {
+    text-align: center;
+    color: #444;
+    margin-top: 10px;
+}
+
+/* ==========================
+   RESPONSIVE
+   ========================== */
+
+@media (max-width: 768px) {
+    .card-wide {
+        padding: 20px 15px;
+    }
+
+    .appointments-table {
+        font-size: 0.82rem;
+    }
+
+    header {
+        flex-direction: column;
+        gap: 10px;
+        padding: 12px 20px;
+    }
+}
+/* Dashboard stats grid */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+}
+
+.stat-box {
+    background: #ffffffee;
+    border-radius: 12px;
+    text-align: center;
+    padding: 20px 10px;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.15);
+}
+
+.stat-box h3 {
+    margin-top: 0;
+    font-size: 1.1rem;
+    color: #444;
+}
+
+.stat-box p {
+    margin: 10px 0 0;
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #00b894;
+}

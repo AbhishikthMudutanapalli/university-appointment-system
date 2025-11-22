@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}Register - University Appointment System{% endblock %}
+
+{% block content %}
+<div class="page-wrapper">
+  <div class="card">
+      <h2>Register</h2>
+
+      <form method="post">
+
+          <label>Name</label>
+          <input type="text" name="name" required>
+
+          <label>Email</label>
+          <input type="email" name="email" required>
+
+          <label>Password</label>
+          <input type="password" name="password" required>
+
+          <label>Role</label>
+          <select name="role" required>
+              <option value="student">Student</option>
+              <option value="faculty">Faculty</option>
+              <option value="admin">Admin</option>
+          </select>
+
+          <label>Department (optional)</label>
+          <select name="department_id">
+              <option value="">-- None --</option>
+              {% for d in departments %}
+                <option value="{{ d.department_id }}">{{ d.department_name }}</option>
+              {% endfor %}
+          </select>
+
+          <button type="submit">Register</button>
+      </form>
+
+      <p>
+        Already have an account?
+        <a href="{{ url_for('login') }}">Login</a>
+      </p>
+  </div>
+</div>
+{% endblock %}
