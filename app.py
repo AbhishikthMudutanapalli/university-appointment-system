@@ -1,3 +1,11 @@
+"""
+University Appointment System
+-----------------------------
+This Flask application allows students to register, log in, view available appointments,
+schedule new appointments, and manage their bookings. It connects to a SQLite database
+and provides basic CRUD operations for appointments and availability.
+"""
+
 from flask import Flask, render_template, redirect, url_for, request, session, flash
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
